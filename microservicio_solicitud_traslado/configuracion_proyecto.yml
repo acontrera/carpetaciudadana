@@ -1,0 +1,26 @@
+proyecto:
+  nombre: Carpeta Ciudadana
+  descripcion: Un sistema de gestión de documentos y trámites en línea
+  directorios:
+    - nombre: common
+      descripcion: Módulos y recursos compartidos entre microservicios
+    - nombre: microservicio_autenticacion
+      descripcion: Microservicio de autenticación de usuarios
+    - nombre: microservicio_verificacion
+      descripcion: Microservicio de verificación de documentos
+    # Continúa con los otros microservicios y directorios aquí...
+  otros_directorios:
+    - nombre: logs
+      descripcion: Archivos de registro de auditorías
+    - nombre: data
+      descripcion: Datos iniciales o recursos estáticos
+  dependencias:
+    - nombre: Flask
+      version: 2.0.1
+    - nombre: SQLAlchemy
+      version: 1.4.25
+  informacion_adicional: |
+    Este archivo YAML describe la estructura de directorios de un proyecto
+    llamado Carpeta Ciudadana, que incluye varios microservicios y recursos
+    compartidos. También proporciona información sobre las dependencias
+    del proyecto.
