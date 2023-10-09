@@ -1,0 +1,24 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main # O la rama principal de tu repositorio
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v2
+
+    - name: Compilar y ejecutar pruebas
+      run: |
+        # Comandos para compilar y ejecutar pruebas aquí
+        # Ejemplo:
+        # npm install
+        # npm test
+
+    - name: Desplegar a Producción
+      # Agrega pasos para desplegar a tu entorno de producción aquí
