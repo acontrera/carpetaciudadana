@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="/static/tus_archivos_estaticos.css">
+<html>
+<head>
+    <title>Registro</title>
+</head>
+<body>
+    <h1>Registro</h1>
+    <form id="registro-form">
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required /><br />
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required /><br />
+        <input type="submit" value="Registrarse" onclick="enviarFormulario()" />
+    </form>
+    <script>
+        function enviarFormulario() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const data = {
+                email: email,
+                password: password
+            };
+            fetch("/autenticacion/registro", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message); // Muestra un mensaje de éxito
+                    // Aquí puedes redirigir al usuario a otra página si es necesario
+                } else {
+                    throw new Error(data.detail || "Error en el registro1");
+                }
+            })
+            .catch(error => {
+                alert(error.message); // Muestra un mensaje de error
+            });
+        }
+    </script>
+    
+</body>
+</html>

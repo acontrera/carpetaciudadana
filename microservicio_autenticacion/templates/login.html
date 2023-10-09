@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" type="text/css" href="/static/tus_archivos_estaticos.css">
+</head>
+<body>
+    <h1>Iniciar sesión</h1>
+    <form id="login-form">
+
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required><br>
+    
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required><br>
+    
+        <input type="submit" value="Iniciar sesión" onclick="enviarFormulario()" />
+    </form>
+    
+    <!-- Agrega un botón para redireccionar a la página de registro -->
+    <form method="GET" action="/autenticacion/registro">
+        <input type="submit" value="Ir a Registro">
+    </form>
+
+    <script>
+        function enviarFormulario() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const data = {
+                email: email,
+                password: password
+            };
+            fetch("/autenticacion/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json" // Establece el tipo de contenido a JSON
+                },
+                body: JSON.stringify(data) // Convierte los datos en formato JSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                    // Redirige al usuario si es necesario
+                } else if (data.detail) {
+                    alert(data.detail);
+                } else {
+                    throw new Error(data.detail || "Error en el inicio de sesión");
+                }
+            })
+            .catch(error => {
+                alert("Ocurrió un error: " + error.message);
+            });
+        }
+    </script>
+    
+</body>
+</html>
